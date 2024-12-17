@@ -3,9 +3,20 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-
-        driveInTicket();
-        walkInTicket();
+        System.out.println("Welcome to the 2024 Christmas Zoo Lights!");
+        System.out.println("Do you want to purchase a ticket, or lookup a ticket? (purchase 1, lookup 2)");
+        Scanner scanner = new Scanner(System.in);
+        int input = scanner.nextInt();
+        if(input == 1){
+            System.out.println("Do you want to drive through or walk in? (drive 1, walk 2)");
+            input = scanner.nextInt();
+            if(input == 1){
+                driveInTicket();
+            } else if(input == 2){
+                walkInTicket();
+            }
+        } else if(input == 2){
+        }
     }
 
     public static void driveInTicket(){
@@ -79,7 +90,7 @@ public class Main {
         int weight = 0;
         boolean trainRider = false;
         boolean isWeek = false;
-
+        //TODO: finish walk through
 
     }
 }
