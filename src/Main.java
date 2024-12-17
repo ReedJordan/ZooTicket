@@ -24,6 +24,7 @@ public class Main {
         int bornYear = 0;
         boolean isWeek = false;
         double price = 65;
+        int ticketNumber = rand.nextInt(100000);
 
         System.out.println("How many people are you taking?");
         numPeople = input.nextInt();
@@ -61,6 +62,7 @@ public class Main {
         System.out.println("Member: "+ member);
         System.out.printf("Price: %.2f", price);
         System.out.println("\nDate of attendance: 12/"+ attendDay +"/2024");
+        System.out.println("Ticket Number: "+ ticketNumber);
         System.out.println("D R I V E T H R O U G H T I C K E T");
         System.out.println("-------------------------------------------");
     }
