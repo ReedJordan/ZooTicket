@@ -79,6 +79,22 @@ public class Main {
     }
 
     public static void walkInTicket(){
+        Scanner input = new Scanner(System.in);
+        Random rand = new Random();
+        
+        /*
+        Total steps needed:
+        Full Name (finished)
+        Total cost (finished)
+        Age (finished)
+        Attendance date (finished)
+        If they can drink (finished)
+        If they can ride the train (finished)
+        ID number (finished)
+        Printing it out (finished)
+        */
+        
+        String walkerName = "";
         boolean member = false;
         int attendMonth = 12;
         int attendDay = 0;
@@ -86,11 +102,122 @@ public class Main {
         int bornMonth = 0;
         int bornDay = 0;
         int bornYear = 0;
-        int height = 0;
-        int weight = 0;
+        int age = 0;
+        boolean tallEnough = false;
+        boolean lightEnough = false;
         boolean trainRider = false;
+        boolean canDrink = false;
+        String dayOfWeek = "";
         boolean isWeek = false;
-        //TODO: finish walk through
+        int ticketNumber = rand.nextInt(100000);
+        
+        double price = 0;
 
+        System.out.println("What is your name? First and last.");
+        walkerName = input.nextLine();
+        System.out.println("Which december day do you want to see the lights?");
+        attendDay = input.nextInt();
+        if(attendDay == 1 || attendDay == 8 || attendDay == 15 || attendDay == 22 || attendDay == 29){
+            dayOfWeek = "Sunday";
+        }else if (attendDay == 2 || attendDay == 9 || attendDay == 16 || attendDay == 23 || attendDay == 30){
+            dayOfWeek = "Monday";
+            isWeek = true;
+        }else if (attendDay == 3 || attendDay == 10 || attendDay == 17 || attendDay == 24 || attendDay == 31){
+            dayOfWeek = "Tuesday";
+            isWeek = true;
+        }else if (attendDay == 4 || attendDay == 11 || attendDay == 18 || attendDay == 25){
+            dayOfWeek = "Wednesday";
+            isWeek = true;
+        }else if (attendDay == 5 || attendDay == 12 || attendDay == 19 || attendDay == 26){
+            dayOfWeek = "Thursday";
+            isWeek = true;
+        }else if (attendDay == 6 || attendDay == 13 || attendDay == 20 || attendDay == 27){
+            dayOfWeek = "Friday";
+            isWeek = true;
+        }else if (attendDay == 7 || attendDay ==  14|| attendDay == 21 || attendDay == 28){
+            dayOfWeek = "Saturday";
+        }
+        
+        
+        System.out.println("Do you have a membership? (y/n)");
+        String memAnswer = input.nextLine();
+        memAnswer = input.nextLine();
+        if (memAnswer.equals("y")){
+            System.out.println("What is your membership code?");
+            String memCode = input.nextLine();
+            if (memCode.equals("MEMBER")){
+                member = true;
+            }
+        }
+        
+        System.out.println("When were you born? (mm/dd/yyyy format)");
+        bornMonth = input.nextInt();
+        System.out.println("/ ");
+        bornDay = input.nextInt();
+        System.out.println("/ ");
+        bornYear = input.nextInt();
+        System.out.println("Will you be 21 or older by the date you plan to attend? (yes/no)");
+        String drinkAnswer = input.nextLine();
+        drinkAnswer = input.nextLine();
+        if(drinkAnswer.equals("yes") || drinkAnswer.equals("Yes")){
+            canDrink = true;
+        }
+        
+        age = 2024 - bornYear;
+        if(age >= 18){
+            if(isWeek){
+                price = 16;
+            }else if (!isWeek){
+                price = 25;
+            }
+        }else if (15 <= age && age < 18){
+            if(isWeek){
+                price = 12;
+            }else if (!isWeek){
+                price = 18;
+            }
+        }else if (2 <= age && age < 15){
+            if(isWeek){
+                price = 8;
+            }else if (!isWeek){
+                price = 12;
+            }
+        }else if (age < 2){
+            price = 0;
+        }
+        if(member){
+            price = price * 0.8;
+        }
+        
+        System.out.println("Are you taller than 4 feet? (yes/no)");
+        String heightAnsw = input.nextLine();
+        if(heightAnsw.equals("yes") || heightAnsw.equals("Yes")){
+            tallEnough = true;
+        }
+        System.out.println("Are you lighter than 300 lbs? (yes/no)");
+        String weightAnsw = input.nextLine();
+        if(weightAnsw.equals("yes") || weightAnsw.equals("Yes")){
+            lightEnough = true;
+        }
+        if(tallEnough && lightEnough){
+            trainRider = true;
+        }
+        
+        
+        System.out.println("\n");
+        System.out.println("----------------------------------");
+        System.out.println("Name: "+ walkerName);
+        System.out.println("Date of Birth: "+ bornMonth +"/"+ bornDay +"/"+ bornYear);
+        System.out.println("Member: "+ member);
+        System.out.printf("Price: %.2f", price);
+        System.out.println("\nDate of attendance: 12/"+ attendDay +"/2024");
+        System.out.println("Train eligible: "+ trainRider);
+        System.out.println("Drink eligible: "+ canDrink);
+        System.out.println("Ticket Number: "+ ticketNumber);
+        System.out.println("W A L K I N T I C K E T");
+        System.out.println("----------------------------------");
+        
+        
+        
     }
 }
