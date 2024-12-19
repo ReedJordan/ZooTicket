@@ -31,9 +31,9 @@ public class Main {
             System.out.println("Do you want to look up a drive through ticket or a walk in ticket? (drive 1, walk 2)");
             int lookingInput = scanner.nextInt();
             if(lookingInput == 1){
-
+                System.out.println("What is the ticket ID?");
             }else if (lookingInput == 2){
-
+                System.out.println("What is the ticket ID?");
             }
         }
     }
