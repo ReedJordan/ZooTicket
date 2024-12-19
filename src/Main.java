@@ -3,38 +3,73 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Welcome to the 2024 Christmas Zoo Lights!");
-
-        //stuff for drive through array:
-        String[][] driveInArray = new String[100][6]; //stores 100 tickets
-        int driveTicketNum = 0;
-
-        //stuff for walk in array:
-        String[][] walkInArray = new String[100][8]; //stores 100 tickets
-        int walkTicketNum = 0;
-        int randomNum = 5;
-
-        System.out.println("Do you want to purchase a ticket, or lookup a ticket? (purchase 1, lookup 2)");
         Scanner scanner = new Scanner(System.in);
-        int input = scanner.nextInt();
-        if(input == 1){
-            System.out.println("Do you want to drive through or walk in? (drive 1, walk 2)");
-            int buyerInput = scanner.nextInt();
-            if(buyerInput == 1){
-                driveInArray = driveInTicket(driveInArray, driveTicketNum);
-                driveTicketNum++;
-            } else if(buyerInput == 2){
-                walkInArray = walkInTicket(walkInArray, walkTicketNum, randomNum);
-                walkTicketNum++;
+
+        System.out.println("Welcome to the 2024 Christmas Zoo Lights!");
+        System.out.println("After getting your ticket, please type -1 to quit, or any other number to continue.");
+        int userWantsOut = 0;
+        while(userWantsOut != -1) {
+
+            //stuff for drive through array:
+            String[][] driveInArray = new String[100][6]; //stores 100 tickets
+            int driveTicketNum = 0;
+
+            //stuff for walk in array:
+            String[][] walkInArray = new String[100][8]; //stores 100 tickets
+            int walkTicketNum = 0;
+            int randomNum = 5;
+
+            System.out.println("Do you want to purchase a ticket, or lookup a ticket? (purchase 1, lookup 2)");
+            int input = scanner.nextInt();
+            if (input == 1) {
+                System.out.println("Do you want to drive through or walk in? (drive 1, walk 2)");
+                int buyerInput = scanner.nextInt();
+                if (buyerInput == 1) {
+                    driveInArray = driveInTicket(driveInArray, driveTicketNum);
+                    driveTicketNum++;
+                } else if (buyerInput == 2) {
+                    walkInArray = walkInTicket(walkInArray, walkTicketNum, randomNum);
+                    walkTicketNum++;
+                }
+            } else if (input == 2) {
+                System.out.println("Do you want to look up a drive through ticket or a walk in ticket? (drive 1, walk 2)");
+                int lookingInput = scanner.nextInt();
+                if (lookingInput == 1) {
+                    System.out.println("What is the ticket ID?");
+                    int givenDriveNum = scanner.nextInt();
+                    int neededNumber = (int) givenDriveNum / 1000;
+
+                    System.out.println("-------------------------------------------");
+                    System.out.println("Name: " + driveInArray[neededNumber][0]);
+                    System.out.println("Date of Birth: " + driveInArray[neededNumber][1]);
+                    System.out.println("Member: " + driveInArray[neededNumber][2]);
+                    System.out.printf("Price: %.2f", driveInArray[neededNumber][3]);
+                    System.out.println("\nDate of attendance: " + driveInArray[neededNumber][4]);
+                    System.out.println("Ticket Number: " + driveInArray[neededNumber][5]);
+                    System.out.println("D R I V E T H R O U G H T I C K E T");
+                    System.out.println("-------------------------------------------");
+
+                } else if (lookingInput == 2) {
+                    System.out.println("What is the ticket ID?");
+                    int givenWalkNum = scanner.nextInt();
+                    int needWalkNumber = (int) givenWalkNum / 1000;
+
+                    System.out.println("----------------------------------");
+                    System.out.println("Name: " + walkInArray[needWalkNumber][0]);
+                    System.out.println("Date of Birth: " + walkInArray[needWalkNumber][1]);
+                    System.out.println("Member: " + walkInArray[needWalkNumber][2]);
+                    System.out.printf("Price: %.2f", walkInArray[needWalkNumber][3]);
+                    System.out.println("\nDate of attendance: " + walkInArray[needWalkNumber][4]);
+                    System.out.println("Train eligible: " + walkInArray[needWalkNumber][5]);
+                    System.out.println("Drink eligible: " + walkInArray[needWalkNumber][6]);
+                    System.out.println("Ticket Number: " + walkInArray[needWalkNumber][7]);
+                    System.out.println("W A L K I N T I C K E T");
+                    System.out.println("----------------------------------");
+
+                }
             }
-        } else if(input == 2){
-            System.out.println("Do you want to look up a drive through ticket or a walk in ticket? (drive 1, walk 2)");
-            int lookingInput = scanner.nextInt();
-            if(lookingInput == 1){
-                System.out.println("What is the ticket ID?");
-            }else if (lookingInput == 2){
-                System.out.println("What is the ticket ID?");
-            }
+
+            userWantsOut= scanner.nextInt();
         }
     }
 
