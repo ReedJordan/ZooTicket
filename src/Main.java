@@ -7,9 +7,12 @@ public class Main {
 
         //stuff for drive through array:
         String[][] driveInArray = new String[100][6]; //stores 100 tickets
+        int driveTicketNum = 0;
 
         //stuff for walk in array:
         String[][] walkInArray = new String[100][8]; //stores 100 tickets
+        int walkTicketNum = 0;
+        int randomNum = 5;
 
         System.out.println("Do you want to purchase a ticket, or lookup a ticket? (purchase 1, lookup 2)");
         Scanner scanner = new Scanner(System.in);
@@ -18,9 +21,11 @@ public class Main {
             System.out.println("Do you want to drive through or walk in? (drive 1, walk 2)");
             int buyerInput = scanner.nextInt();
             if(buyerInput == 1){
-                driveInTicket();
+                driveInArray = driveInTicket(driveInArray, driveTicketNum);
+                driveTicketNum++;
             } else if(buyerInput == 2){
-                walkInTicket();
+                walkInArray = walkInTicket(walkInArray, walkTicketNum, randomNum);
+                walkTicketNum++;
             }
         } else if(input == 2){
             System.out.println("Do you want to look up a drive through ticket or a walk in ticket? (drive 1, walk 2)");
@@ -33,7 +38,7 @@ public class Main {
         }
     }
 
-    public static void driveInTicket(){
+    public static String[][] driveInTicket(String[][] storeArr, int partID){
         Scanner input = new Scanner(System.in);
         Random rand = new Random();
 
@@ -49,7 +54,8 @@ public class Main {
         int bornYear = 0;
         boolean isWeek = false;
         double price = 65;
-        int ticketNumber = rand.nextInt(100000);
+        int ticketNumber = rand.nextInt(1000);
+        String realNumber = (partID * 1000) + ticketNumber +" ";
 
         System.out.println("How many people are you taking?");
         numPeople = input.nextInt();
@@ -58,6 +64,7 @@ public class Main {
         driverName = input.nextLine();
         System.out.println("Which december day do you want to see the lights?");
         attendDay = input.nextInt();
+        String visitDate = "12/"+ attendDay +"/2024";
         System.out.println("Do you have a membership? (y/n)");
         String memAnswer = input.nextLine();
         memAnswer = input.nextLine();
@@ -74,6 +81,7 @@ public class Main {
         bornDay = input.nextInt();
         System.out.println("/ ");
         bornYear = input.nextInt();
+        String birthday = bornMonth +"/"+ bornDay +"/"+ bornYear;
 
         if (numPeople > 8) {
             price = price + (12 * (numPeople - 8));
@@ -83,29 +91,31 @@ public class Main {
         }
         System.out.println("-------------------------------------------");
         System.out.println("Name: "+ driverName);
-        System.out.println("Date of Birth: "+ bornMonth +"/"+ bornDay +"/"+ bornYear);
+        System.out.println("Date of Birth: "+ birthday);
         System.out.println("Member: "+ member);
         System.out.printf("Price: %.2f", price);
-        System.out.println("\nDate of attendance: 12/"+ attendDay +"/2024");
-        System.out.println("Ticket Number: "+ ticketNumber);
+        System.out.println("\nDate of attendance: "+ visitDate);
+        System.out.println("Ticket Number: "+ realNumber);
         System.out.println("D R I V E T H R O U G H T I C K E T");
         System.out.println("-------------------------------------------");
+
+        storeArr[partID][0] = driverName;
+        storeArr[partID][1] = birthday;
+        String isMember = member +" ";
+        storeArr[partID][2] = isMember;
+        String ticketPrice = price +" ";
+        storeArr[partID][3] = ticketPrice;
+        storeArr[partID][4] = visitDate;
+        storeArr[partID][5] = realNumber;
+
+        return storeArr;
+
     }
 
-    /*
-    Things to store:
-    name
-    birthdate
-    membership
-    price
-    attendance day
-    ticket number
-     */
 
-    public static void walkInTicket(){
+    public static String[][] walkInTicket(String[][] arrStore, int partialID, int randLOL){
         Scanner input = new Scanner(System.in);
         Random rand = new Random();
-        
 
         
         String walkerName = "";
@@ -123,7 +133,8 @@ public class Main {
         boolean canDrink = false;
         String dayOfWeek = "";
         boolean isWeek = false;
-        int ticketNumber = rand.nextInt(100000);
+        int ticketNumber = rand.nextInt(1000);
+        String trueNumber = (partialID * 1000) + ticketNumber +" ";
         
         double price = 0;
 
@@ -151,6 +162,7 @@ public class Main {
         }else if (attendDay == 7 || attendDay ==  14|| attendDay == 21 || attendDay == 28){
             dayOfWeek = "Saturday";
         }
+        String visitDay = dayOfWeek +", 12/"+ attendDay +"/2024";
         
         
         System.out.println("Do you have a membership? (y/n)");
@@ -163,6 +175,7 @@ public class Main {
                 member = true;
             }
         }
+        String amMember = member +" ";
         
         System.out.println("When were you born? (mm/dd/yyyy format)");
         bornMonth = input.nextInt();
@@ -223,26 +236,29 @@ public class Main {
         System.out.println("----------------------------------");
         System.out.println("Name: "+ walkerName);
         System.out.println("Date of Birth: "+ birthday);
-        System.out.println("Member: "+ member);
+        System.out.println("Member: "+ amMember);
         System.out.printf("Price: %.2f", price);
-        System.out.println("\nDate of attendance: 12/"+ attendDay +"/2024");
+        System.out.println("\nDate of attendance: "+ visitDay);
         System.out.println("Train eligible: "+ trainRider);
         System.out.println("Drink eligible: "+ canDrink);
-        System.out.println("Ticket Number: "+ ticketNumber);
+        System.out.println("Ticket Number: "+ trueNumber);
         System.out.println("W A L K I N T I C K E T");
         System.out.println("----------------------------------");
         
-        /*
-        things to store:
-        name
-        birthdate
-        membership
-        price
-        attendance day
-        train riding
-        drink drinking
-        ticket number
-         */
-        
+
+        arrStore[partialID][0] = walkerName;
+        arrStore[partialID][1] = birthday;
+        arrStore[partialID][2] = amMember;
+        String goodPrice = price +" ";
+        arrStore[partialID][3] = goodPrice;
+        arrStore[partialID][4] = visitDay;
+        String canRide = trainRider +" ";
+        arrStore[partialID][5] = canRide;
+        String drinkThirsty = canDrink +" ";
+        arrStore[partialID][6] = drinkThirsty;
+        arrStore[partialID][7] = trueNumber;
+
+        return arrStore;
+
     }
 }
