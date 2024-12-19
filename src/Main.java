@@ -90,7 +90,13 @@ public class Main {
         boolean isWeek = false;
         double price = 65;
         int ticketNumber = rand.nextInt(1000);
-        String realNumber = (partID * 1000) + ticketNumber +" ";
+        String firstPart = "";
+        if(partID == 0){
+            firstPart = "0";
+        }else if (partID / 10 == 0){
+            firstPart = "0";
+        }
+        String realNumber = firstPart + partID + ticketNumber +" ";
 
         System.out.println("How many people are you taking?");
         numPeople = input.nextInt();
@@ -169,7 +175,13 @@ public class Main {
         String dayOfWeek = "";
         boolean isWeek = false;
         int ticketNumber = rand.nextInt(1000);
-        String trueNumber = (partialID * 1000) + ticketNumber +" ";
+        String firstBit = "";
+        if(partialID == 0){
+            firstBit = "0";
+        }else if (partialID / 10 == 0){
+            firstBit = "0";
+        }
+        String trueNumber = firstBit + partialID + ticketNumber +" ";
         
         double price = 0;
 
