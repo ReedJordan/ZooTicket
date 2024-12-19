@@ -4,18 +4,32 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to the 2024 Christmas Zoo Lights!");
+
+        //stuff for drive through array:
+        String[][] driveInArray = new String[100][6]; //stores 100 tickets
+
+        //stuff for walk in array:
+        String[][] walkInArray = new String[100][8]; //stores 100 tickets
+
         System.out.println("Do you want to purchase a ticket, or lookup a ticket? (purchase 1, lookup 2)");
         Scanner scanner = new Scanner(System.in);
         int input = scanner.nextInt();
         if(input == 1){
             System.out.println("Do you want to drive through or walk in? (drive 1, walk 2)");
-            input = scanner.nextInt();
-            if(input == 1){
+            int buyerInput = scanner.nextInt();
+            if(buyerInput == 1){
                 driveInTicket();
-            } else if(input == 2){
+            } else if(buyerInput == 2){
                 walkInTicket();
             }
         } else if(input == 2){
+            System.out.println("Do you want to look up a drive through ticket or a walk in ticket? (drive 1, walk 2)");
+            int lookingInput = scanner.nextInt();
+            if(lookingInput == 1){
+
+            }else if (lookingInput == 2){
+
+            }
         }
     }
 
@@ -78,21 +92,21 @@ public class Main {
         System.out.println("-------------------------------------------");
     }
 
+    /*
+    Things to store:
+    name
+    birthdate
+    membership
+    price
+    attendance day
+    ticket number
+     */
+
     public static void walkInTicket(){
         Scanner input = new Scanner(System.in);
         Random rand = new Random();
         
-        /*
-        Total steps needed:
-        Full Name (finished)
-        Total cost (finished)
-        Age (finished)
-        Attendance date (finished)
-        If they can drink (finished)
-        If they can ride the train (finished)
-        ID number (finished)
-        Printing it out (finished)
-        */
+
         
         String walkerName = "";
         boolean member = false;
@@ -156,6 +170,7 @@ public class Main {
         bornDay = input.nextInt();
         System.out.println("/ ");
         bornYear = input.nextInt();
+        String birthday = bornMonth +"/"+ bornDay +"/"+ bornYear;
         System.out.println("Will you be 21 or older by the date you plan to attend? (yes/no)");
         String drinkAnswer = input.nextLine();
         drinkAnswer = input.nextLine();
@@ -207,7 +222,7 @@ public class Main {
         System.out.println("\n");
         System.out.println("----------------------------------");
         System.out.println("Name: "+ walkerName);
-        System.out.println("Date of Birth: "+ bornMonth +"/"+ bornDay +"/"+ bornYear);
+        System.out.println("Date of Birth: "+ birthday);
         System.out.println("Member: "+ member);
         System.out.printf("Price: %.2f", price);
         System.out.println("\nDate of attendance: 12/"+ attendDay +"/2024");
@@ -217,7 +232,17 @@ public class Main {
         System.out.println("W A L K I N T I C K E T");
         System.out.println("----------------------------------");
         
-        
+        /*
+        things to store:
+        name
+        birthdate
+        membership
+        price
+        attendance day
+        train riding
+        drink drinking
+        ticket number
+         */
         
     }
 }
