@@ -39,7 +39,7 @@ public class Main {
                 if (lookingInput == 1) {
                     System.out.println("What is the ticket ID?");
                     int givenDriveNum = scanner.nextInt();
-                    int neededNumber = findTicketIndex(driveInArray, givenDriveNum);
+                    int neededNumber = findTicketIndex(driveInArray, givenDriveNum, true);
 
                     if (neededNumber != -1) {
                         System.out.println("-------------------------------------------");
@@ -51,13 +51,15 @@ public class Main {
                         System.out.println("Ticket Number: " + driveInArray[neededNumber][5]);
                         System.out.println("D R I V E T H R O U G H T I C K E T");
                         System.out.println("-------------------------------------------");
+                        System.out.println("Enter -1 to quit, or any other number to return to the beginning.");
+
                     } else {
                         System.out.println("Ticket not found.");
                     }
                 } else if (lookingInput == 2) {
                     System.out.println("What is the ticket ID?");
                     int givenWalkNum = scanner.nextInt();
-                    int needWalkNumber = findTicketIndex(walkInArray, givenWalkNum);
+                    int needWalkNumber = findTicketIndex(walkInArray, givenWalkNum, false);
 
                     if (needWalkNumber != -1) {
                         System.out.println("----------------------------------");
@@ -71,6 +73,8 @@ public class Main {
                         System.out.println("Ticket Number: " + walkInArray[needWalkNumber][7]);
                         System.out.println("W A L K I N T I C K E T");
                         System.out.println("----------------------------------");
+                        System.out.println("Enter -1 to quit, or any other number to return to the beginning.");
+
                     } else {
                         System.out.println("Ticket not found.");
                     }
@@ -113,6 +117,10 @@ public class Main {
             String memCode = input.nextLine();
             if (memCode.equals("MEMBER")) {
                 member = true;
+                System.out.println("That is a valid membership code.");
+            }else{
+                System.out.println("That is not a valid membership code.");
+                System.out.println("You will be charged the full price.");
             }
         }
         System.out.println("When were you born? (mm/dd/yyyy format)");
@@ -134,6 +142,7 @@ public class Main {
         System.out.println("Ticket Number: " + realNumber);
         System.out.println("D R I V E T H R O U G H T I C K E T");
         System.out.println("-------------------------------------------");
+        System.out.println("Enter -1 to quit, or any other number to return to the beginning.");
 
         storeArr[partID][0] = driverName;
         storeArr[partID][1] = birthday;
@@ -146,7 +155,6 @@ public class Main {
     }
 
     public static String[][] walkInTicket(String[][] arrStore, int partialID, int randLOL) {
-        //TODO: fix the WalkInTicket lookup
         Scanner input = new Scanner(System.in);
         Random rand = new Random();
 
@@ -181,13 +189,17 @@ public class Main {
             String memCode = input.nextLine();
             if (memCode.equals("MEMBER")) {
                 member = true;
+                System.out.println("That is a valid membership code.");
+            }else{
+                System.out.println("That is not a valid membership code.");
+                System.out.println("You will be charged the full price.");
             }
         }
 
         System.out.println("When were you born? (mm/dd/yyyy format)");
         String birthday = input.nextLine();
 
-        age = Period.between(LocalDate.parse(birthday, DateTimeFormatter.ofPattern("MM/dd/yyyy")), LocalDate.of(2024, 12, 25)).getYears();
+        age = Period.between(LocalDate.parse(birthday, DateTimeFormatter.ofPattern("MM/dd/yyyy")), LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("MM/dd/yyyy"))).getYears();
         if (age >= 21) {
             canDrink = true;
         }
@@ -218,13 +230,13 @@ public class Main {
         }
 
         System.out.println("Are you taller than 4 feet? (yes/no)");
-        String heightAnsw = input.nextLine();
-        if (heightAnsw.equals("yes") || heightAnsw.equals("Yes")) {
+        String heightAnswer = input.nextLine();
+        if (heightAnswer.equals("yes") || heightAnswer.equals("Yes")) {
             tallEnough = true;
         }
         System.out.println("Are you lighter than 300 lbs? (yes/no)");
-        String weightAnsw = input.nextLine();
-        if (weightAnsw.equals("yes") || weightAnsw.equals("Yes")) {
+        String weightAnswer = input.nextLine();
+        if (weightAnswer.equals("yes") || weightAnswer.equals("Yes")) {
             lightEnough = true;
         }
         if (tallEnough && lightEnough) {
@@ -243,6 +255,8 @@ public class Main {
         System.out.println("Ticket Number: " + trueNumber);
         System.out.println("W A L K I N T I C K E T");
         System.out.println("----------------------------------");
+        System.out.println("Enter -1 to quit, or any other number to return to the beginning.");
+
 
         arrStore[partialID][0] = walkerName;
         arrStore[partialID][1] = birthday;
@@ -256,9 +270,10 @@ public class Main {
         return arrStore;
     }
 
-    public static int findTicketIndex(String[][] arr, int ticketNumber) {
+    public static int findTicketIndex(String[][] arr, int ticketNumber, boolean isDriveIn) {
+        int ticketColumn = isDriveIn ? 5 : 7;
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i][5] != null && arr[i][5].equals(String.valueOf(ticketNumber))) {
+            if (arr[i][ticketColumn] != null && arr[i][ticketColumn].equals(String.valueOf(ticketNumber))) {
                 return i;
             }
         }
