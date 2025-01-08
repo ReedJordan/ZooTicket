@@ -55,6 +55,8 @@ public class Main {
 
                     } else {
                         System.out.println("Ticket not found.");
+                        System.out.println("Enter -1 to quit, or any other number to return to the beginning.");
+
                     }
                 } else if (lookingInput == 2) {
                     System.out.println("What is the ticket ID?");
@@ -77,6 +79,8 @@ public class Main {
 
                     } else {
                         System.out.println("Ticket not found.");
+                        System.out.println("Enter -1 to quit, or any other number to return to the beginning.");
+
                     }
                 }
             }
@@ -229,14 +233,14 @@ public class Main {
             price = price * 0.8;
         }
 
-        System.out.println("Are you taller than 4 feet? (yes/no)");
-        String heightAnswer = input.nextLine();
-        if (heightAnswer.equals("yes") || heightAnswer.equals("Yes")) {
+        System.out.println("What is your height in inches?");
+        int heightAnswer = input.nextInt();
+        if (heightAnswer > 60) {
             tallEnough = true;
         }
-        System.out.println("Are you lighter than 300 lbs? (yes/no)");
-        String weightAnswer = input.nextLine();
-        if (weightAnswer.equals("yes") || weightAnswer.equals("Yes")) {
+        System.out.println("Enter your weight in pounds.");
+        int weightAnswer = input.nextInt();
+        if (weightAnswer <300) {
             lightEnough = true;
         }
         if (tallEnough && lightEnough) {
