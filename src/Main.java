@@ -5,6 +5,19 @@ import java.time.format.DateTimeFormatter;
 import java.time.DayOfWeek;
 import java.time.Period;
 
+/*
+Who in the sweet everloving HELL added this goddamn DATE THING
+and DID NOT MAKE IT WORK
+we had a PERFECTLY GOOD SETUP BEFORE
+it was FINE
+Fix it or remove it
+
+Love, Reed
+<3
+ */
+
+
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -182,7 +195,7 @@ public class Main {
         walkerName = input.nextLine();
         System.out.println("Which date do you want to see the lights? (MM/dd/yyyy)");
         String dateInput = input.nextLine();
-        LocalDate attendDate = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        LocalDate attendDate = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("mm/dd/yyyy"));
         DayOfWeek dayOfWeek = attendDate.getDayOfWeek();
         String visitDay = dayOfWeek + ", " + attendDate.toString();
 
